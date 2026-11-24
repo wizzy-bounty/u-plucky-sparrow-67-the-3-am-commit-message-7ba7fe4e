@@ -8,6 +8,8 @@ Standard library only, no network, deterministic.
 
 import os
 
+MAX_ENTRY_CHARS = 200
+
 ENTRY = (
     "fix: production is down because I 'optimized' the database "
     "by removing the part that stores data"
@@ -16,7 +18,7 @@ ENTRY = (
 
 def main() -> None:
     text = ENTRY.strip()
-    assert 1 <= len(text) <= 200, "entry must be 1-200 characters"
+    assert 1 <= len(text) <= MAX_ENTRY_CHARS, "entry must be 1-200 characters"
     assert text == text.strip() and "\n" not in text, "entry must be one line"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
